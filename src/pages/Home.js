@@ -13,7 +13,7 @@ const Home = () => (
                     Powered by creators everywhere.
                 </p>
             </div>
-            <SearchBar width={50} height={50} />
+            <SearchBar />
         </div>
     </div>
 
