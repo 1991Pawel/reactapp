@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/home.scss'
-import SearchBar from './Search'
+import SearchBar from '../components/SearchBar'
 
 
 const Home = () => (
