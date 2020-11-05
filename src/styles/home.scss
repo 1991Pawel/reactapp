@@ -1,0 +1,22 @@
+.home {
+    height: 100vh;
+    width: 100%;
+    background-image:  linear-gradient(rgba(39, 39, 39, 0.2), rgba(0, 0, 0, 0.5)),url('../assets//home-bg.jpg');
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+
+    &__container {
+        max-width: 1200px;
+        padding: 0 1rem;
+    }
+
+    &__title,&__content {
+        color: #fff;
+    }
+}
