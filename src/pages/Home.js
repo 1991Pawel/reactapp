@@ -14,7 +14,7 @@ const Home = () => {
                     <p className="home__desc">
                         The internet’s source of freely-usable images.
                         Powered by creators everywhere.
-                </p>
+                    </p>
                 </div>
                 <SearchBar />
             </div>
