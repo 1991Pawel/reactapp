@@ -4,6 +4,7 @@
         height: 5rem;
         border-radius: .5rem;
         overflow: hidden;
+        position: relative;
 
     }
 
@@ -23,7 +24,20 @@
     }
 
     &__input {
+
         background: #F5F5F5;
         flex:1;
+    }
+
+    &__results {
+        margin-top: 1rem;;
+        border-radius: .5rem;
+        padding: 2rem;
+
+        background: #F5F5F5;
+        p {
+            color: #575757;
+            margin: 2rem 0;
+        }
     }
 }
