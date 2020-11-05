@@ -1,11 +1,19 @@
+
 .search-bar {
+
+    &__inner .spinner {
+        position: absolute;
+        right: 1rem;
+        top:50%;
+        transform: translateY(-50%);
+    }
+
     &__inner {
         display: flex;
         height: 5rem;
         border-radius: .5rem;
         overflow: hidden;
         position: relative;
-
     }
 
     &__btn,&__input {
