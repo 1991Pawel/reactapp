@@ -4,12 +4,14 @@ import '../styles/searchbar.scss'
 import { useFetch } from '../hooks/useFetch'
 
 
-const Result = ({ data, search }) => {
+const Result = ({ data }) => {
 
+    console.log(data);
     return (
-        <ul className="search-bar__results">
-            {data.map(({ id, alt_description }) => <li key={id}>{alt_description}</li>)}
-        </ul>
+        null
+        // <ul className="search-bar__results">
+        //     {data?.map(({ id, title }) => <li key={id}>{title}</li>)}
+        // </ul>
     )
 
 }
@@ -35,7 +37,7 @@ const SearchBar = () => {
                     type="text"
                     placeholder="Search..." />
             </div>
-            <Result search={search} data={data} />
+            <Result data={data} />
         </div>
     )
 }
