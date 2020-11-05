@@ -1,5 +1,6 @@
 
 .search-bar {
+    position: relative;
 
     &__inner .spinner {
         position: absolute;
@@ -29,6 +30,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        
+        svg {
+            transition: .2s ease-in-out;
+        }
+    }
+  
+    &__btn:hover svg {
+        fill:#000;
+        transform: scale(1.1);
     }
 
     &__input {
@@ -38,14 +48,28 @@
     }
 
     &__results {
-        margin-top: 1rem;;
+        position: absolute;
+        top:5.5rem;
+        right: 0;
+        left: 0;
         border-radius: .5rem;
-        padding: 2rem;
-
+        overflow: hidden;
         background: #F5F5F5;
-        p {
-            color: #575757;
-            margin: 2rem 0;
+        
+        li {
+            display: flex;
+            list-style: none;
+            transition: .2s ease-in-out;
         }
+        li:hover {
+            background-color: #ccc;
+            cursor: pointer;
+        }
+         a,span {
+             padding: 1.25rem;
+             text-decoration: none;
+             color: #575757;
+             width: 100%;
+         }
     }
 }
