@@ -5,7 +5,7 @@ const API_KEY = 'O7LuvAFjOLt9kL-tr6d4JkHd1csLzgzHqItnJHs1RQg'
 
 
 
-export const useFetch = (query) => {
+export const useFetch = (query, limit = 5) => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const debouncedSearchTerm = useDebounce(query, 500);
@@ -17,7 +17,7 @@ export const useFetch = (query) => {
             try {
                 setLoading(true)
                 if (debouncedSearchTerm.length >= 3) {
-                    const request = await axios.get(`https://api.unsplash.com/search/collections?page=1&per_page=5&query=${debouncedSearchTerm}&client_id=${API_KEY}`);
+                    const request = await axios.get(`https://api.unsplash.com/search/collections?page=1&per_page=${limit}&query=${debouncedSearchTerm}&client_id=${API_KEY}`);
                     setData(request.data.results)
                 }
             }
@@ -28,7 +28,7 @@ export const useFetch = (query) => {
 
         }
         fetchData();
-    }, [debouncedSearchTerm])
+    }, [debouncedSearchTerm, limit])
 
     return { data, loading, debouncedSearchTerm }
 

@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Switch >
           <Route exact path="/" component={Home} />
-          <Route exact path="/search" component={Search} />
+          <Route exact path="/search/:searchId" component={Search} />
         </Switch>
       </Router>
     </>
