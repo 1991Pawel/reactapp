@@ -23,7 +23,7 @@ const Result = ({ data, setShowSuggestions, showSuggestions }) => {
                     <Link onClick={() => setShowSuggestions(false)} key={id} to={`/search/${title}`}>{title}</Link>
                 </li>
             )}
-        </ul >
+        </ul>
     )
 }
 

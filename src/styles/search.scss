@@ -66,11 +66,16 @@
         width: 230px;
         height: 200px;
         margin: 2rem;
+        cursor: pointer;
+        transition:.3s ease-in-out;
 
         img {
             height: 100%;
             width: 100%;
         }
     }
+   &__item:hover {
+       opacity:.5;
+   }
 }
 

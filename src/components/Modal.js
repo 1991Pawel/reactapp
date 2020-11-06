@@ -1,16 +1,21 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import '../styles/modal.scss'
 import ReactDom from 'react-dom'
+import { ModalContext } from '../context/ModalConext'
 
-const Modal = ({ openModal, setCloseModal, children }) => {
-    if (!openModal) return null
 
+const Modal = () => {
+    const { closeModal, open, currentElement } = useContext(ModalContext);
+    if (!open) return null;
     return ReactDom.createPortal(
         <>
             <div className="modal__overlay">
+                {console.log(currentElement.cover_photo)}
                 <div className="modal">
-                    <button onClick={() => setCloseModal(false)}>Zamknij</button>
-                    {children}
+                    <button onClick={closeModal}>Zamknij</button>
+                    <div className="modal__inner">
+                        <img className="modal__image" src={currentElement.cover_photo.urls.regular} alt={currentElement.cover_photo.alt_description} />
+                    </div>
                 </div>
             </div>
         </>,

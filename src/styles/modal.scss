@@ -6,6 +6,7 @@
     background-color: #fff;
     padding: 1rem;
     z-index: 1000;
+    max-height: 80%;
 
     &__overlay {
         position: fixed;
@@ -15,5 +16,12 @@
         bottom: 0;
         z-index: 1000;
         background-color: rgba(95, 95, 95, 0.753);
+    }
+
+    &__image {
+        display: block;
+        margin: 0 auto;
+        width:350px;
+        height:350px;
     }
 }
