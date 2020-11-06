@@ -4,8 +4,6 @@ import SearchBar from '../components/SearchBar'
 
 
 const Home = () => {
-
-
     return (
         <div className="home">
             <div className="home__container">
