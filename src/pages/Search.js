@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
+import Modal from '../components/Modal'
 import '../styles/search.scss'
 import { useFetch } from '../hooks/useFetch'
 
@@ -28,6 +29,7 @@ const PhotoCollection = ({ data }) => {
 }
 
 const Search = () => {
+    const [openModal, setCloseModal] = useState(false);
     const { searchId } = useParams();
     const resultPerPage = 10;
     const { data } = useFetch(searchId, resultPerPage);
@@ -47,6 +49,16 @@ const Search = () => {
                     <PhotoCollection data={data} />
                 </div>
             </div>
+            <Modal openModal={openModal} setCloseModal={setCloseModal}>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ill
+                o nobis voluptate ex doloribus possimus quibusdam ab laboriosam
+                maxime est, vitae itaque animi architecto neque maiores excepturi in
+                cidunt accusantium quaerat accusamus eaque! Tenetur modi maxime dolori
+                bus ab, mollitia perferendis architecto voluptatibus. Nobis recusandae numqu
+                am in corrupti velit sapiente veritatis totam explicabo.
+                </p>
+            </Modal>
+            <button onClick={() => setCloseModal(true)}>Otwórz</button>
         </div>
     )
 }
