@@ -2,16 +2,17 @@ import { useState, useEffect } from 'react'
 import axios from '../helpers/axios';
 
 
-export const useFetch = (fetchUrl) => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
+export const useFetchSinglePhoto = (fetchUrl, id = null) => {
+    const [photo, setPhoto] = useState([]);
+    const [loadingPhoto, setLoading] = useState(true);
 
     useEffect(() => {
+        if (id === null) return;
         const fetchData = async () => {
             try {
                 setLoading(true)
                 const request = await axios.get(`${fetchUrl}${process.env.REACT_APP_API_KEY}`);
-                setData(request.data.results)
+                setPhoto(request.data)
             }
             catch (err) {
                 console.log(err)
@@ -19,16 +20,8 @@ export const useFetch = (fetchUrl) => {
             setLoading(false)
         }
         fetchData();
-    }, [fetchUrl])
+    }, [id, fetchUrl])
 
-    return { data, loading }
+    return { photo, loadingPhoto }
 
 }
-
-
-
-
-
-
-
-

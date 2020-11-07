@@ -1,25 +1,44 @@
 import React, { useContext } from 'react'
 import '../styles/modal.scss'
-import ReactDom from 'react-dom'
 import { ModalContext } from '../context/ModalConext'
+import Spinner from './Spinner';
 
 
-const Modal = () => {
-    const { closeModal, open, currentElement } = useContext(ModalContext);
-    if (!open) return null;
-    return ReactDom.createPortal(
+
+const Modal = ({ photo, loadingPhoto }) => {
+    const { closeModal, open } = useContext(ModalContext);
+    if (!open) return null
+    if (loadingPhoto) return (
+        <div className="modal__overlay"><div className="modal">
+            <button className="modal__btn" onClick={closeModal}>X</button>
+            <Spinner />
+        </div>
+        </div>
+    )
+    return (
         <>
             <div className="modal__overlay">
-                {console.log(currentElement.cover_photo)}
                 <div className="modal">
-                    <button onClick={closeModal}>Zamknij</button>
-                    <div className="modal__inner">
-                        <img className="modal__image" src={currentElement.cover_photo.urls.regular} alt={currentElement.cover_photo.alt_description} />
+                    <button className="modal__btn" onClick={closeModal}>X</button>
+                    <div className="modal__user">
+                        <span className="user__avatar">
+                            <img src={photo.user.profile_image.medium} alt={photo.user.name} />
+                        </span>
+                        <h5 className="user">
+                            {photo.user.name}
+                        </h5>
+                    </div>
+                    <div className="modal__image">
+                        <img src={photo.urls.regular} alt={photo.alt_description} />
+                        {console.log(photo.urls)}
+                        <span className="modal__likes">{'likes: ' + photo.likes}</span>
+                    </div>
+                    <div className="modal__location">
+                        {photo.location.name}
                     </div>
                 </div>
             </div>
-        </>,
-        document.getElementById('portal')
+        </>
     )
 }
 

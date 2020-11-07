@@ -4,12 +4,15 @@ import './styles/global.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ModalProvider } from './context/ModalConext'
+import { SinglePhotoProvider } from './context/SinglePhotoContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ModalProvider>
-      <App />
-    </ModalProvider>
+    <SinglePhotoProvider>
+      <ModalProvider>
+        <App />
+      </ModalProvider>
+    </SinglePhotoProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
