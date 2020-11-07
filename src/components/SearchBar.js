@@ -5,10 +5,11 @@ import SvgSearch from './SvgSearch';
 import '../styles/searchbar.scss'
 import { useFetch } from '../hooks/useFetch'
 import Spinner from './Spinner';
+import { useDebounce } from '../hooks/useDebounce'
 
+const searchByQuery = (searchQuery, page = 1, limitPerPage = 5) => `search/collections?page=${page}&per_page=${limitPerPage}&query=${searchQuery}&client_id=`;
 
-const Result = ({ data, setShowSuggestions, showSuggestions }) => {
-
+const Suggestions = ({ data, setShowSuggestions, showSuggestions }) => {
     if (!data.length) {
         return (
             <ul className="active search-bar__results">
@@ -23,15 +24,16 @@ const Result = ({ data, setShowSuggestions, showSuggestions }) => {
                     <Link onClick={() => setShowSuggestions(false)} key={id} to={`/search/${title}`}>{title}</Link>
                 </li>
             )}
-        </ul >
+        </ul>
     )
 }
 
 const SearchBar = ({ content = '' }) => {
     const history = useHistory();
     const [search, setSearch] = useState(content);
-    const { data, loading, debouncedSearchTerm } = useFetch(search);
+    const debounceValue = useDebounce(search, 600)
     const [showSuggestions, setShowSuggestions] = useState(true);
+    const { data, loading } = useFetch(searchByQuery(debounceValue));
 
     useEffect(() => {
         setShowSuggestions(false)
@@ -66,16 +68,10 @@ const SearchBar = ({ content = '' }) => {
                     type="text"
                     required="required"
                     placeholder="Search..." />
-
                 {loading && <Spinner />}
                 {search && <button onClick={resetInputHandler} type="reset" className="search-bar__btn">X</button>}
             </div>
-            {
-                debouncedSearchTerm.length >= 3 && <Result
-                    setShowSuggestions={setShowSuggestions}
-                    showSuggestions={showSuggestions}
-                    data={data} />
-            }
+            {debounceValue.length >= 3 && <Suggestions setShowSuggestions={setShowSuggestions} showSuggestions={showSuggestions} data={data} />}
         </form >
     )
 }
