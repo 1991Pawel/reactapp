@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import '../styles/dashboard.scss'
 
 const Tabs = ({ uniqueTags }) => {
     return (

@@ -7,9 +7,6 @@ export const SinglePhotoProvider = ({ children }) => {
     const [singlePhoto, setSinglePhoto] = useState(null);
 
 
-
-
-
     return (
         <SinglePhotoContext.Provider value={{ singlePhoto, setSinglePhoto }}>
             {children}

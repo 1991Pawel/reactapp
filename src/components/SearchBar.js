@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import SvgSearch from './SvgSearch';
-import '../styles/searchbar.scss'
+import '../styles/search-bar.scss'
 import { useFetch } from '../hooks/useFetch'
 import Spinner from './Spinner';
 import { useDebounce } from '../hooks/useDebounce'
@@ -21,7 +21,6 @@ const Suggestions = ({ suggestionArray, setShowSuggestions, showSuggestions }) =
         <ul className={showSuggestions ? 'active search-bar__results' : 'search-bar__results'}>
             {suggestionArray.map(({ id, title }) =>
                 <li key={id}>
-                    {console.log(suggestionArray)}
                     <Link onClick={() => setShowSuggestions(false)} key={id} to={`/search/${title}`}>{title}</Link>
                 </li>
             )}

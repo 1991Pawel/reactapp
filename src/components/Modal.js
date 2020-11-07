@@ -3,16 +3,24 @@ import '../styles/modal.scss'
 import { ModalContext } from '../context/ModalConext'
 import Spinner from './Spinner';
 
-
-
-const Modal = ({ photo, loadingPhoto }) => {
+const Modal = ({ photo, loadingPhoto, error }) => {
     const { closeModal, open } = useContext(ModalContext);
     if (!open) return null
-    if (loadingPhoto) return (
-        <div className="modal__overlay"><div className="modal">
-            <button className="modal__btn" onClick={closeModal}>X</button>
-            <Spinner />
-        </div>
+    if (loadingPhoto) {
+        return (
+            <div className="modal__overlay">
+                <div className="modal">
+                    <Spinner />
+                </div>
+            </div>
+        )
+    }
+    if (error) return (
+        <div className="modal__overlay">
+            <div className="modal">
+                <button className="modal__btn" onClick={closeModal}>X</button>
+                nie można załadować zdjecia.
+            </div>
         </div>
     )
     return (
@@ -30,12 +38,11 @@ const Modal = ({ photo, loadingPhoto }) => {
                     </div>
                     <div className="modal__image">
                         <img src={photo.urls.regular} alt={photo.alt_description} />
-                        {console.log(photo.urls)}
-                        <span className="modal__likes">{'likes: ' + photo.likes}</span>
                     </div>
                     <div className="modal__location">
                         {photo.location.name}
                     </div>
+                    <span className="modal__likes">{'likes: ' + photo.likes}</span>
                 </div>
             </div>
         </>
