@@ -8,15 +8,19 @@
     z-index: 1000;
     max-width: 300px;
 
+    @media only screen and (min-width: 1000px) { 
+        max-width: 500px;
+    }
+
     &__btn {
         top:1rem;
         right: 1rem;
         position: absolute;
-        height: 2.5rem;
-        width:2.5rem;
+        height: 3.5rem;
+        width:3.5rem;
         cursor: pointer;
         background-color: #ccc;
-        color: 000;
+        color: #333;
         border:none;
     }
 
@@ -31,17 +35,16 @@
         background-color: rgba(95, 95, 95, 0.753);
     }
 
-    &__inner {
-        margin: 2px solid blue;
-    }
+
 
     &__image {
         display: block;
-        margin: 1px solid red;
-        margin: 1rem 0;
+        margin: 2rem 0;
 
         img {
-            max-width: 100%;
+            display: block;
+           width:70%;
+           margin:0 auto;
         }
     }
 
@@ -58,6 +61,7 @@
         border-radius: 50%;
         overflow: hidden;
         margin: 1rem 0;
+
 
 
         img {

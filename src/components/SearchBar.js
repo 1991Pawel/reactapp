@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { useHistory } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import SvgSearch from './SvgSearch';
-import '../styles/searchbar.scss'
+import '../styles/search-bar.scss'
 import { useFetch } from '../hooks/useFetch'
 import Spinner from './Spinner';
 import { useDebounce } from '../hooks/useDebounce'
 
-const searchByQuery = (searchQuery, page = 1, limitPerPage = 5) => `search/collections?page=${page}&per_page=${limitPerPage}&query=${searchQuery}&client_id=`;
+const Suggestions = ({ suggestionArray, setShowSuggestions, showSuggestions }) => {
 
-const Suggestions = ({ data, setShowSuggestions, showSuggestions }) => {
-    if (!data.length) {
+
+    if (!suggestionArray.length) {
         return (
             <ul className="active search-bar__results">
                 <li><span>no results</span></li>
@@ -19,7 +19,7 @@ const Suggestions = ({ data, setShowSuggestions, showSuggestions }) => {
     }
     return (
         <ul className={showSuggestions ? 'active search-bar__results' : 'search-bar__results'}>
-            {data?.map(({ id, title }) =>
+            {suggestionArray.map(({ id, title }) =>
                 <li key={id}>
                     <Link onClick={() => setShowSuggestions(false)} key={id} to={`/search/${title}`}>{title}</Link>
                 </li>
@@ -33,7 +33,8 @@ const SearchBar = ({ content = '' }) => {
     const [search, setSearch] = useState(content);
     const debounceValue = useDebounce(search, 600)
     const [showSuggestions, setShowSuggestions] = useState(true);
-    const { data, loading } = useFetch(searchByQuery(debounceValue));
+    const { data, loading } = useFetch(`search/collections?&per_page=5&query=${debounceValue}&client_id=`);
+    const suggestionArray = data.map((item) => item).splice(0, 1);
 
     useEffect(() => {
         setShowSuggestions(false)
@@ -71,7 +72,7 @@ const SearchBar = ({ content = '' }) => {
                 {loading && <Spinner />}
                 {search && <button onClick={resetInputHandler} type="reset" className="search-bar__btn">X</button>}
             </div>
-            {debounceValue.length >= 3 && <Suggestions setShowSuggestions={setShowSuggestions} showSuggestions={showSuggestions} data={data} />}
+            {debounceValue.length >= 3 && <Suggestions debounceValue={debounceValue} setShowSuggestions={setShowSuggestions} showSuggestions={showSuggestions} suggestionArray={suggestionArray} />}
         </form >
     )
 }
