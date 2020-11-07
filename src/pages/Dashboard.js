@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import SearchBar from '../components/SearchBar'
 import '../styles/search.scss'
 import { useFetch } from '../hooks/useFetch'
@@ -7,20 +7,11 @@ import { ModalContext } from '../context/ModalConext';
 import { SinglePhotoContext } from '../context/SinglePhotoContext'
 import Modal from '../components/Modal'
 import { useFetchSinglePhoto } from '../hooks/useFetchSinglePhoto';
+import Tabs from '../components/Tabs'
 
+const PhotoCollection = ({ data, openSinglePhoto }) => {
+    if (!data.length) return <p>Brak zdjęć</p>
 
-
-const Tabs = ({ uniqueTags }) => {
-    return (
-        <ul className="tabs">
-            {uniqueTags.map((tag) => <li key={tag} className="tabs__item">
-                <Link className="tabs__link" to={`/search/${tag}`}>{tag}</Link>
-            </li>)}
-        </ul>
-    )
-}
-
-const PhotoCollection = ({ data, openModal, openSinglePhoto }) => {
     return (
         <ul className="photo">
             {data.map((photo) => <li key={photo.id} onClick={() => openSinglePhoto(photo.id)} className="photo__item">
@@ -32,7 +23,7 @@ const PhotoCollection = ({ data, openModal, openSinglePhoto }) => {
     )
 }
 
-const Search = () => {
+const Dashboard = () => {
     const { openModal } = useContext(ModalContext);
     const { setSinglePhoto } = useContext(SinglePhotoContext);
     const { searchId } = useParams();
@@ -40,15 +31,15 @@ const Search = () => {
     const [singleImageId, setSingleImageId] = useState(null);
     const { photo, loadingPhoto } = useFetchSinglePhoto(`photos/${singleImageId}?client_id=`, singleImageId);
 
+    // array for tabs
+    const tagsList = data.map((item) => item.tags).flat();
+    const uniqueTags = Array.from(new Set(tagsList.map((item) => item.title).slice(0, 5)));
+
     const openSinglePhoto = (id) => {
         setSingleImageId(id);
         openModal();
         setSinglePhoto(photo)
     }
-
-    // array for tabs
-    const tagsList = data.map((item) => item.tags).flat();
-    const uniqueTags = Array.from(new Set(tagsList.map((item) => item.title).slice(0, 5)));
 
 
     return (
@@ -61,11 +52,11 @@ const Search = () => {
             </nav>
             <div className="search__inner">
                 <div className="search__image">
-                    {data.length && <PhotoCollection openSinglePhoto={openSinglePhoto} data={data} />}
+                    <PhotoCollection openSinglePhoto={openSinglePhoto} data={data} />
                 </div>
             </div>
         </div>
     )
 }
-export default Search;
+export default Dashboard;
 

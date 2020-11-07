@@ -4,8 +4,8 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import Search from './pages/Search';
 import Home from './pages/Home';
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       <Router>
         <Switch >
           <Route exact path="/" component={Home} />
-          <Route exact path="/search/:searchId" component={Search} />
+          <Route exact path="/search/:searchId" component={Dashboard} />
         </Switch>
       </Router>
     </>
