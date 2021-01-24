@@ -22,3 +22,7 @@ npm
 ```sh
 npm run start
 ```
+
+## live
+
+[demo](https://zealous-wing-e2ada2.netlify.app/)
